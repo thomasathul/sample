@@ -47,10 +47,12 @@ jobs:
           dir: ${{ github.workspace }}/qt/
       - name: clone qtstyleplugins
         run: git clone https://code.qt.io/qt/qtstyleplugins.git
-             cd qtstyleplugins
-             qmake
-             nmake
-             nmake install
+      - name: run make jobs
+        run: 
+            cd qtstyleplugins
+            qmake
+            nmake
+            nmake install
       #- name: copy binaries
       #  run: python questions/63477276/search_binaries.py qtstyleplugins/plugins/styles/
       #- name: after
