@@ -50,7 +50,7 @@ jobs:
       - name: run make jobs
         run: cd qtstyleplugins
       - name: run qmake     
-        run: qmake
+        run: qmake -makefile
       - name: run nmake  
         run: nmake
       - name: run installation  
