@@ -47,22 +47,6 @@ jobs:
           dir: ${{ github.workspace }}/qt/
       - name: clone qtstyleplugins
         run: git clone https://code.qt.io/qt/qtstyleplugins.git
-      - name: compile qtstyleplugins in Windows
-        if: matrix.os.name == 'Windows'
-        shell: cmd
-        run: |
-          call "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
-          cd qtstyleplugins
-          qmake
-          nmake
-          nmake install
-      - name: compile qtstyleplugins in Linux or MacOS
-        if: matrix.os.name == 'Linux' || matrix.os.name == 'MacOS'
-        run: |
-          cd qtstyleplugins
-          qmake
-          make
-          make install
       #- name: copy binaries
       #  run: python questions/63477276/search_binaries.py qtstyleplugins/plugins/styles/
       #- name: after
