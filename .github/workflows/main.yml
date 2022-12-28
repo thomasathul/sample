@@ -45,12 +45,23 @@ jobs:
         with:
           version: ${{ matrix.qt }}
           dir: ${{ github.workspace }}/qt/
+      - name: Setup VS Dev Environment
+        # You may pin to the exact commit or the version.
+        # uses: seanmiddleditch/gha-setup-vsdevenv@adf16e54e207da0da148c8901a98a34d7aa3eb7a
+        uses: seanmiddleditch/gha-setup-vsdevenv@v4
+        with:
+          # Name or path to vswhere.exr
+          vswhere: vswhere.exe
+          # Target build architecture
+          arch: amd64
+          # List of components required in the selected VS installation (semi-colon separated)
+          components: Microsoft.VisualStudio.Component.VC.Tools.x86.x64    
       - name: clone qtstyleplugins
-        run: git clone https://code.qt.io/qt/qtstyleplugins.git    
-      - name: run qtstyleplugins
+        run: git clone https://code.qt.io/qt/qtstyleplugins.git
+      - name: compile qtstyleplugins in Windows
+        if: matrix.os.name == 'Windows'
         shell: cmd
         run: |
-          call "C:/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/VC/Auxiliary/Build/vcvars64.bat"
           cd qtstyleplugins
           qmake
           nmake
